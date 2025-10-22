@@ -1,0 +1,4 @@
+npm run lint -- --max-warnings=0 || {
+    echo "❌ Linting failed. Commit aborted."
+    exit 1
+}
