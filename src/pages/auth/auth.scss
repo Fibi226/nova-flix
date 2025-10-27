@@ -1,0 +1,147 @@
+body {
+  background-image:
+          linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+          url('https://external-preview.redd.it/6Wteq5vgs-B-6xt8LKJ6BiPKErMbpd8o6WIwVpRvH90.jpg?width=1080&crop=smart&auto=webp&s=8333b318cc48f653c5fc4bafb62f527d743f5ddc');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+}
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 10;
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #dc2626;
+    }
+  }
+
+  .login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 8rem;
+  }
+
+  .login-box {
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 4rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background-color: #374151;
+        border: none;
+        border-radius: 0.5rem;
+        color: #fff;
+        font-size: 1rem;
+        box-sizing: border-box;
+
+        &::placeholder {
+          color: #9ca3af;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px #dc2626;
+        }
+      }
+    }
+
+    .btn {
+      width: 100%;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+      box-sizing: border-box;
+      color : whitesmoke;
+
+      &.btn-login {
+        background-color: #dc2626;
+
+        &:hover {
+          background-color: #b91c1c;
+        }
+      }
+
+      &.btn-alt {
+        background-color: #374151;
+
+        &:hover {
+          background-color: #4b5563;
+        }
+      }
+    }
+
+    .divider {
+      text-align: center;
+      color: #9ca3af;
+      margin: 1rem 0;
+    }
+
+    .forgot {
+      text-align: center;
+      margin-top: 1rem;
+
+      a {
+        color: #9ca3af;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      margin-top: 1.5rem;
+
+      input[type="checkbox"] {
+        width: 1rem;
+        height: 1rem;
+        accent-color: #dc2626;
+        cursor: pointer;
+      }
+
+      label {
+        margin-left: 0.5rem;
+        color: #9ca3af;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
