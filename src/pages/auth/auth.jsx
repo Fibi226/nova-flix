@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./auth.scss";
 
 const Auth = () => {
@@ -22,7 +22,7 @@ const Auth = () => {
                                 />
                             </div>
                             <div className="form-group">
-                                <input type="password" placeholder="Пароль" />
+                                <input type="password" placeholder="Пароль"/>
                             </div>
 
                             <button type="submit" className="btn btn-login">
@@ -44,7 +44,7 @@ const Auth = () => {
                             </div>
 
                             <div className="remember">
-                                <input type="checkbox" id="remember-me" />
+                                <input type="checkbox" id="remember-me"/>
                                 <label htmlFor="remember-me">
                                     Запам'ятати мене
                                 </label>
@@ -68,7 +68,7 @@ const Auth = () => {
                                 />
                             </div>
                             <div className="form-group">
-                                <input type="password" placeholder="Пароль" />
+                                <input type="password" placeholder="Пароль"/>
                             </div>
 
                             <button type="submit" className="btn btn-login">
@@ -90,7 +90,7 @@ const Auth = () => {
                             </div>
 
                             <div className="remember">
-                                <input type="checkbox" id="remember-me" />
+                                <input type="checkbox" id="remember-me"/>
                                 <label htmlFor="remember-me">
                                     Запам'ятати мене
                                 </label>
