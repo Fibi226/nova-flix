@@ -1,0 +1,274 @@
+$primary: #E50914;
+$background-light: #F5F5F5;
+$background-dark: #141414;
+$surface-light: #FFFFFF;
+$surface-dark: #1F1F1F;
+$text-light: #141414;
+$text-dark: #E5E5E5;
+$text-secondary-light: #6B7280;
+$text-secondary-dark: #9CA3AF;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.novaflix-app {
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: $background-dark;
+  color: $text-dark;
+}
+
+.container {
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (min-width: 640px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 80px;
+  background-color: rgba($background-light, 0.8);
+  backdrop-filter: blur(4px);
+
+  .dark & {
+    background-color: rgba($background-dark, 0.8);
+  }
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 2rem; // space-x-8
+}
+
+.logo {
+  font-size: 1.875rem; // text-3xl
+  font-weight: 700; // font-bold
+  color: $primary;
+}
+
+.main-nav {
+  display: none;
+  align-items: center;
+  gap: 1.5rem; // space-x-6
+
+  @media (min-width: 768px) { // md
+    display: flex;
+  }
+}
+
+.nav__link {
+  font-size: 1rem; // text-base
+  font-weight: 500; // font-medium
+  color: $text-light;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $primary;
+  }
+
+  &--active {
+    color: $primary;
+  }
+
+  .dark & {
+    color: $text-dark;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  .dark &--active {
+    color: $primary;
+  }
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem; // space-x-4
+}
+
+.icon-btn {
+  padding: 0.5rem; // p-2
+  border-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #e5e7eb; // gray-200
+  }
+
+  .dark & {
+    .icon-btn__icon {
+      color: $text-dark;
+    }
+
+    &:hover {
+      background-color: #374151; // gray-700
+    }
+  }
+}
+
+.icon-btn__icon {
+  font-size: 1.5rem;
+  color: $text-light;
+}
+
+.profile-avatar {
+  width: 2.5rem; // w-10
+  height: 2.5rem; // h-10
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem; // text-lg
+  font-weight: 700; // font-bold
+  background-color: #d1d5db; // gray-300
+  color: #4b5563; // gray-600
+
+  .dark & {
+    background-color: #4b5563; // gray-600
+    color: #d1d5db; // gray-300
+  }
+}
+
+.main-content {
+  padding-top: 3rem; // py-12
+  padding-bottom: 3rem; // py-12
+}
+
+.section-title {
+  font-size: 1.5rem; // text-2xl
+  font-weight: 700; // font-bold
+  margin-bottom: 2rem; // mb-8
+}
+
+.series-grid {
+  display: grid;
+  gap: 1.5rem; // gap-6
+
+
+  grid-template-columns: repeat(2, 1fr); // cols-2
+
+  @media (min-width: 640px) { // sm
+    grid-template-columns: repeat(3, 1fr); // sm:cols-3
+  }
+  @media (min-width: 768px) { // md
+    grid-template-columns: repeat(4, 1fr); // md:cols-4
+  }
+  @media (min-width: 1024px) { // lg
+    grid-template-columns: repeat(5, 1fr); // lg:cols-5
+  }
+  @media (min-width: 1280px) { // xl
+    grid-template-columns: repeat(6, 1fr); // xl:cols-6
+  }
+}
+
+// 8. CARD
+.series-card {
+  cursor: pointer;
+
+  &__poster-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.75rem; // mb-3
+    border-radius: $border-radius-lg;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); // shadow-lg
+
+    // Співвідношення сторін 2/3
+    &::before {
+      content: '';
+      display: block;
+      padding-top: calc(3 / 2 * 100%); // 3:2 ratio
+    }
+
+    &:hover {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); // hover:shadow-xl
+    }
+  }
+
+  &__poster-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+
+    // Збільшення при наведенні
+    .series-card:hover & {
+      transform: scale(1.05);
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    // Градієнт (відповідає from-black/70 via-black/40 to-transparent)
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  &__title-on-poster {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.75rem; // p-3
+  }
+
+  &__title-text {
+    color: white;
+    font-weight: 700; // font-bold
+    font-size: 0.875rem; // text-sm
+    line-height: 1.25rem;
+  }
+
+  &__title {
+    font-weight: 600; // font-semibold
+    font-size: 1rem; // text-base
+    line-height: 1.5rem;
+  }
+
+  &__meta {
+    font-size: 0.875rem; // text-sm
+    color: $text-secondary-light;
+
+    .dark & {
+      color: $text-secondary-dark;
+    }
+  }
+}

@@ -7,7 +7,7 @@ export const FilmCard = ({ series }) => {
             <div className="film-card__poster">
                 <img
                     src={series.posterUrl}
-                    alt={`${series.title} постер`}
+                    alt={`${series.originalTitle} постер`}
                     className="film-card__image"
                 />
                 <div className="film-card__overlay" />

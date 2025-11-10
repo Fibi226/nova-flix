@@ -1,17 +1,25 @@
 import React from 'react'
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
+import MainPage from './pages/main-page/main-page.jsx'
+import Auth from './pages/auth/auth.jsx'
+import Header from './common-ui/header/header.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const location = useLocation()
 
-  return (
-    <>
+    const hideHeaderPaths = ['/auth']
+    const shouldShowHeader = !hideHeaderPaths.includes(location.pathname)
+    return (
+        <>
+            {shouldShowHeader && <Header />}
 
-    </>
-  )
+            <Routes>
+                <Route path='/' element={<MainPage />} />
+                <Route path='/auth' element={<Auth />} />
+            </Routes>
+        </>
+    )
 }
 
 export default App
