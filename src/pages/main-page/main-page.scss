@@ -272,3 +272,43 @@ body {
     }
   }
 }
+
+// Loading, Error, and Empty messages
+.loading-message,
+.error-message,
+.empty-message {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-size: 1.125rem; // text-lg
+  color: $text-secondary-dark;
+
+  .dark & {
+    color: $text-secondary-dark;
+  }
+}
+
+.error-message {
+  color: $primary;
+  font-weight: 500;
+}
+
+.loading-message {
+  position: relative;
+  
+  &::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+  }
+}
+
+@keyframes dots {
+  0%, 20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60%, 100% {
+    content: '...';
+  }
+}
