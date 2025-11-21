@@ -2,18 +2,19 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { hasToken } from "../../utils/tokenStorage.js";
 import "./welcome-page.scss";
+import { ROUTES } from "../../constants/routes.js";
 
 const WelcomePage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
         if (hasToken()) {
-            navigate("/main", { replace: true });
+            navigate(ROUTES.MAIN, { replace: true });
         }
     }, [navigate]);
 
     const handleLoginClick = () => {
-        navigate("/auth");
+        navigate(ROUTES.AUTH);
     };
 
     return (
