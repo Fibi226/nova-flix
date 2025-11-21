@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./film-page.scss";
 import { getFilmById } from "../../services/filmApi.js";
+import { saveLastWatchedFilm } from "../../utils/lastWatchedStorage.js";
 
 const FilmPage = () => {
     const { id } = useParams();
@@ -17,6 +18,9 @@ const FilmPage = () => {
                 setError(null);
                 const data = await getFilmById(id);
                 setFilm(data);
+                if (data) {
+                    saveLastWatchedFilm(data);
+                }
             } catch (err) {
                 console.error("Помилка завантаження фільму:", err);
                 setError("Не вдалося завантажити фільм. Перевірте, чи запущений бекенд на localhost:7108");

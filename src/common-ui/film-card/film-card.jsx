@@ -5,7 +5,6 @@ import "./film-card.scss";
 export const FilmCard = ({ film }) => {
     const navigate = useNavigate();
     
-    
     const filmData = film || {};
     const title = filmData.title || filmData.Title || '';
     const originalTitle = filmData.originalTitle || filmData.OriginalTitle || '';
