@@ -1,12 +1,26 @@
+import { getToken } from '../utils/tokenStorage.js';
+
 const API_BASE_URL = 'https://localhost:7108/api/Film';
+
+
+const getHeaders = () => {
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    
+    const token = getToken();
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+    
+    return headers;
+};
 
 export const getFilms = async () => {
     try {
         const response = await fetch(API_BASE_URL, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getHeaders(),
         });
 
         if (!response.ok) {
@@ -25,9 +39,7 @@ export const getFilmById = async (id) => {
     try {
         const response = await fetch(`${API_BASE_URL}/${id}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getHeaders(),
         });
 
         if (!response.ok) {
