@@ -1,29 +1,28 @@
-const LAST_WATCHED_KEY = 'novaflix_last_watched_film';
+import { STORAGE_KEYS } from '../constants/storage.js';
+import { normalizeFilm } from './filmNormalizer.js';
 
 export const saveLastWatchedFilm = (film) => {
-    if (film) {
-        try {
+    if (!film) {
+        return;
+    }
+    
+    try {
+        const normalizedFilm = normalizeFilm(film);
+        if (normalizedFilm) {
             const filmData = {
-                id: film.id || film.Id || film.filmId || film.FilmId,
-                name: film.title || film.Title || film.name || film.Name,
-                title: film.title || film.Title || film.name || film.Name,
-                originalTitle: film.originalTitle || film.OriginalTitle,
-                posterUrl: film.imageUrl || film.ImageUrl || film.posterUrl || film.PosterUrl,
-                imageUrl: film.imageUrl || film.ImageUrl || film.posterUrl || film.PosterUrl,
-                description: film.filmDescription || film.FilmDescription || film.description || film.Description,
-                filmDescription: film.filmDescription || film.FilmDescription || film.description || film.Description,
+                ...normalizedFilm,
                 watchedAt: new Date().toISOString(),
             };
-            localStorage.setItem(LAST_WATCHED_KEY, JSON.stringify(filmData));
-        } catch (error) {
-            console.error('Помилка збереження останнього переглянутого фільму:', error);
+            localStorage.setItem(STORAGE_KEYS.LAST_WATCHED_FILM, JSON.stringify(filmData));
         }
+    } catch (error) {
+        console.error('Помилка збереження останнього переглянутого фільму:', error);
     }
 };
 
 export const getLastWatchedFilm = () => {
     try {
-        const filmData = localStorage.getItem(LAST_WATCHED_KEY);
+        const filmData = localStorage.getItem(STORAGE_KEYS.LAST_WATCHED_FILM);
         if (filmData) {
             return JSON.parse(filmData);
         }
@@ -34,6 +33,6 @@ export const getLastWatchedFilm = () => {
 };
 
 export const removeLastWatchedFilm = () => {
-    localStorage.removeItem(LAST_WATCHED_KEY);
+    localStorage.removeItem(STORAGE_KEYS.LAST_WATCHED_FILM);
 };
 

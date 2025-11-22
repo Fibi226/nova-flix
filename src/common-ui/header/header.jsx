@@ -3,6 +3,7 @@ import './header.scss';
 import {useNavigate} from "react-router-dom";
 import { getUserAsync } from "../../services/profileApi.js";
 import { hasToken } from "../../utils/tokenStorage.js";
+import { ROUTES } from "../../constants/routes.js";
 
 const Header = () => {
     const [activeLink, setActiveLink] = useState("Серіали");
@@ -35,7 +36,7 @@ const Header = () => {
     };
 
     const handleAvatarClick = () => {
-        navigate("/profile");
+        navigate(ROUTES.PROFILE);
     };
 
     const getAvatarDisplay = () => {
@@ -66,7 +67,7 @@ const Header = () => {
                 <div className="header__left">
                     <h1 
                         className="logo" 
-                        onClick={() => navigate("/main")}
+                        onClick={() => navigate(ROUTES.MAIN)}
                     >
                         NovaFlix
                     </h1>
@@ -75,7 +76,7 @@ const Header = () => {
                             className={`nav__link ${activeLink === "Головна" ? "nav__link--active" : ""}`}
                             onClick={() => {
                                 handleClick("Головна");
-                                navigate("/main");
+                                navigate(ROUTES.MAIN);
                             }}
                         >
                             Головна

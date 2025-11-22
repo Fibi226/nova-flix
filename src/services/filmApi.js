@@ -1,34 +1,11 @@
-import { getToken } from '../utils/tokenStorage.js';
-
-const API_BASE_URL = 'https://localhost:7108/api/Film';
-
-
-const getHeaders = () => {
-    const headers = {
-        'Content-Type': 'application/json',
-    };
-    
-    const token = getToken();
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-    }
-    
-    return headers;
-};
+import { API_ENDPOINTS } from '../constants/api.js';
+import { apiGet } from '../utils/apiClient.js';
+import { normalizeFilm, normalizeFilms } from '../utils/filmNormalizer.js';
 
 export const getFilms = async () => {
     try {
-        const response = await fetch(API_BASE_URL, {
-            method: 'GET',
-            headers: getHeaders(),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
+        const data = await apiGet(API_ENDPOINTS.FILM);
+        return normalizeFilms(data);
     } catch (error) {
         console.error('Error fetching films:', error);
         throw error;
@@ -37,17 +14,8 @@ export const getFilms = async () => {
 
 export const getFilmById = async (id) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/${id}`, {
-            method: 'GET',
-            headers: getHeaders(),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
+        const data = await apiGet(`${API_ENDPOINTS.FILM}/${id}`);
+        return normalizeFilm(data);
     } catch (error) {
         console.error('Error fetching film by id:', error);
         throw error;

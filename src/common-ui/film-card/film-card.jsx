@@ -1,19 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./film-card.scss";
+import { getFilmRoute } from "../../constants/routes.js";
 
 export const FilmCard = ({ film }) => {
     const navigate = useNavigate();
     
-    const filmData = film || {};
-    const title = filmData.title || filmData.Title || '';
-    const originalTitle = filmData.originalTitle || filmData.OriginalTitle || '';
-    const imageUrl = filmData.imageUrl || filmData.ImageUrl || filmData.posterUrl || '';
-    const filmId = filmData.id || filmData.Id || filmData.ID;
+    if (!film) {
+        return null;
+    }
+    
+    const { title = '', originalTitle = '', imageUrl = '', id: filmId = null } = film;
 
     const handleClick = () => {
         if (filmId) {
-            navigate(`/film/${filmId}`);
+            navigate(getFilmRoute(filmId));
         }
     };
 
