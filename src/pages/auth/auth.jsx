@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./auth.scss";
 import { login, register } from "../../services/authApi.js";
 import { saveToken } from "../../utils/tokenStorage.js";
+import { extractAccessToken } from "../../utils/tokenUtils.js";
+import { ROUTES } from "../../constants/routes.js";
 
 const Auth = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -32,10 +34,10 @@ const Auth = () => {
 
         try {
             const result = await login(loginEmail, loginPassword);
-            const token = result.AcesToken || result.acesToken;
+            const token = extractAccessToken(result);
             if (token) {
                 saveToken(token);
-                navigate("/main");
+                navigate(ROUTES.MAIN);
             } else {
                 setError("Не вдалося отримати токен доступу");
             }
@@ -65,10 +67,10 @@ const Auth = () => {
 
         try {
             const result = await register(registerEmail, registerName, registerPassword, registerConfirmPassword);
-            const token = result.AcesToken || result.acesToken;
+            const token = extractAccessToken(result);
             if (token) {
                 saveToken(token);
-                navigate("/main");
+                navigate(ROUTES.MAIN);
             } else {
                 setError("Не вдалося отримати токен доступу");
             }

@@ -1,22 +1,18 @@
-const TOKEN_KEY = 'novaflix_access_token';
-
+import { STORAGE_KEYS } from '../constants/storage.js';
 
 export const saveToken = (token) => {
     if (token) {
-        localStorage.setItem(TOKEN_KEY, token);
+        localStorage.setItem(STORAGE_KEYS.TOKEN, token);
     }
 };
 
-
 export const getToken = () => {
-    return localStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(STORAGE_KEYS.TOKEN);
 };
-
 
 export const removeToken = () => {
-    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(STORAGE_KEYS.TOKEN);
 };
-
 
 export const hasToken = () => {
     return !!getToken();
