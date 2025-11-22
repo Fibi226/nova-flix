@@ -1,90 +1,47 @@
-import { getToken } from '../utils/tokenStorage.js';
-
-const API_BASE_URL = 'https://localhost:7108/api/Profile';
-
-const getHeaders = () => {
-    const headers = {
-        'Content-Type': 'application/json',
-    };
-    
-    const token = getToken();
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-    }
-    
-    return headers;
-};
-
+import { API_ENDPOINTS, RESOURCES_BASE_URL } from '../constants/api.js';
+import { apiGet, apiPut, createHeaders, handleResponse } from '../utils/apiClient.js';
 
 export const getUserAsync = async () => {
     try {
-        const response = await fetch(API_BASE_URL, {
-            method: 'GET',
-            headers: getHeaders(),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
-        console.log(data);
+        return await apiGet(API_ENDPOINTS.PROFILE);
     } catch (error) {
         console.error('Error fetching user profile:', error);
         throw error;
     }
 };
 
-
 export const uploadAvatarAsync = async (imageFile) => {
     try {
         const formData = new FormData();
         formData.append('ImageUrl', imageFile);
 
-        const token = getToken();
-        const headers = {};
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
-
-        const response = await fetch(`${API_BASE_URL}/avatar`, {
+        const headers = createHeaders(false);
+        
+        const response = await fetch(`${API_ENDPOINTS.PROFILE}/avatar`, {
             method: 'POST',
             headers: headers,
             body: formData,
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const fileName = await response.json();
-        console.log(fileName);
-        const imageUrl = `https://localhost:7108/Resources/${fileName.imageUrl}`;
-        return { imageUrl, fileName };
+        const data = await handleResponse(response);
+        const fileName = data.imageUrl || data.fileName?.imageUrl || '';
+        const imageUrl = fileName ? `${RESOURCES_BASE_URL}/${fileName}` : '';
+        
+        return { imageUrl, fileName: data };
     } catch (error) {
         console.error('Error uploading avatar:', error);
         throw error;
     }
 };
 
-
 export const updateProfileAsync = async (email, name, password, imageUrl) => {
     try {
-        const response = await fetch(API_BASE_URL, {
-            method: 'PUT',
-            headers: getHeaders(),
-            body: JSON.stringify({
-                email,
-                name,
-                password,
-                imageUrl,
-            }),
+        await apiPut(API_ENDPOINTS.PROFILE, {
+            email,
+            name,
+            password,
+            imageUrl,
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
     } catch (error) {
         console.error('Error updating profile:', error);
         throw error;

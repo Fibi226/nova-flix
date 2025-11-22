@@ -4,6 +4,8 @@ import "./profile-page.scss";
 import { getUserAsync, updateProfileAsync, uploadAvatarAsync } from "../../services/profileApi.js";
 import { hasToken, removeToken } from "../../utils/tokenStorage.js";
 import { getLastWatchedFilm } from "../../utils/lastWatchedStorage.js";
+import { isValidEmail, validateImageFile } from "../../utils/validation.js";
+import { getFilmRoute, ROUTES } from "../../constants/routes.js";
 
 const ProfilePage = () => {
     const [userProfile, setUserProfile] = useState(null);
@@ -25,7 +27,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if (!hasToken()) {
-            navigate("/auth");
+            navigate(ROUTES.AUTH);
             return;
         }
 
@@ -71,13 +73,9 @@ const ProfilePage = () => {
         const file = e.target.files[0];
         if (!file) return;
 
-        if (!file.type.startsWith('image/')) {
-            setError("Будь ласка, виберіть зображення");
-            return;
-        }
-
-        if (file.size > 5 * 1024 * 1024) {
-            setError("Розмір зображення не повинен перевищувати 5MB");
+        const validation = validateImageFile(file, 5);
+        if (!validation.valid) {
+            setError(validation.error);
             return;
         }
 
@@ -105,7 +103,7 @@ const ProfilePage = () => {
             return;
         }
 
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        if (!isValidEmail(formData.email)) {
             setError("Введіть правильний email");
             return;
         }
@@ -164,12 +162,12 @@ const ProfilePage = () => {
 
     const handleLogout = () => {
         removeToken();
-        navigate("/auth");
+        navigate(ROUTES.AUTH);
     };
 
     const handleContinueWatching = () => {
         if (lastWatchedFilm?.id) {
-            navigate(`/film/${lastWatchedFilm.id}`);
+            navigate(getFilmRoute(lastWatchedFilm.id));
         }
     };
 
