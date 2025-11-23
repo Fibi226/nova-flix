@@ -93,8 +93,6 @@ artifacts/
 *.rsuser
 *.userprefs
 
-## C# source files
-*.cs
 
 ## Mono auto generated files
 mono_crash.*
