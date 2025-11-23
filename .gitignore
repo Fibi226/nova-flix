@@ -17,8 +17,95 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
-*.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
+
+# .NET / Visual Studio
+## Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio cache/options directory
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Build artifacts
+*.pdb
+*.dll
+*.exe
+*.cache
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+## NuGet Packages
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## User-specific files
+*.rsuser
+*.userprefs
+
+## Mono auto generated files
+mono_crash.*
+
+## ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+## StyleCop
+StyleCopReport.xml
+
+## Backend specific
+# Uploaded files
+**/Uploads/
+# Development settings (may contain secrets)
+**/appsettings.Development.json
+# User-specific project files
+*.csproj.user
